@@ -7,9 +7,9 @@ service:
   stages:
     Release: # optional, only relevant if you enable Release stage with Cloud Foundry deployment activated
       cfCredentialsId: "cf-creds"
-      stringVariables:
-        - name: "s4odataurl"
-          value: "https://blogs.sap.com"      
+      credentialVariables:
+        - name: "s4_odata_url"
+          credentialId: "S4ODATAURL"
 # Stages configuration
 stages:
   Build:
@@ -42,4 +42,4 @@ steps:
     mtaExtensionDescriptor: "-e sandbox.mtaext"
     mtaDeployParameters: "-f --version-rule ALL"
     mtaExtensionCredentials:
-      s4_odata_url: 's4odataurl'
+      s4_odata_url: 'S4ODATAURL'
