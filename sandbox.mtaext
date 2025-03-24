@@ -1,0 +1,19 @@
+_schema-version: "3.1"
+ID: demo-app-sandbox
+description: Demo App (Sandbox environment)
+version: 1.0.0
+extends: demo-app
+parameters:
+  S4_URL: "<%= S4_URL %>"
+
+modules:
+  - name: demo-app-destination-content
+    content:
+      instance:
+        destinations:
+          - Name: S4-destination
+            Authentication: OAuth2ClientCredentials
+            ClientId: "43434"
+            TokenServiceInstanceName: demo-app-auth
+            TokenServiceKeyName: demo-app-destination-key
+            URL: ${S4_URL}

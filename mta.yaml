@@ -1,0 +1,45 @@
+_schema-version: "3.1"
+ID: demo-app
+description: Damo app
+version: 1.0.0
+parameters:
+  enable-parallel-deployments: true
+modules:
+  - name: demo-app-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: demo-app-destination
+        parameters:
+          content-target: true
+          service-key:
+            name: demo-app-destination-key
+      - name: demo-app-auth
+        parameters:
+          service-key:
+            name: demo-app-auth-key
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+    build-parameters:
+      no-source: true
+
+resources:
+  - name: demo-app-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        version: 1.0.0
+      service: destination
+      service-name: demo-app-destination
+      service-plan: lite
+
+  - name: demo-app-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      config:
+        xsappname: demo-app-${org}-${space}
+        tenant-mode: dedicated
