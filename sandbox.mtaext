@@ -13,4 +13,4 @@ modules:
             ClientId: "43434"
             TokenServiceInstanceName: demo-app-auth
             TokenServiceKeyName: demo-app-destination-key
-            URL: <%= s4-url %>
+            URL: <%= s4_odata_url %>
