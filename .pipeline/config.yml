@@ -1,0 +1,45 @@
+# Project configuration
+general:
+  buildTool: "mta" # "mta", "npm", or "maven"
+
+service:
+  buildToolVersion: "MBTJ11N14" # depends on buildTool value
+  stages:
+    Release: # optional, only relevant if you enable Release stage with Cloud Foundry deployment activated
+      cfCredentialsId: "cf-creds"
+      stringVariables:
+        - name: "S4_URL"
+          value: "https://blogs.sap.com"
+# Stages configuration
+stages:
+  Build:
+    mavenExecuteStaticCodeChecks: false # true, if you want to execute static code checks to verify the syntax of your Java code
+    npmExecuteLint: false # true, if you want to run a lint check that verifies the syntax of your JavaScript code
+
+  Additional Unit Tests:
+    karmaExecuteTests: false # true, if you want to execute the Karma Test Runner (default: false)
+    npmExecuteScripts: false # true, if you want to execute test scripts that are defined in step npmExecuteScripts
+
+  Acceptance:
+    cloudFoundryDeploy: false # true, if you want to deploy to Cloud Foundry test space (default: false)
+
+  Compliance:
+    sonarExecuteScan: false
+
+  Release:
+    cloudFoundryDeploy: true # true, if you want to deploy to Cloud Foundry. If you set this parameter to true, the CloudFoundryDeploy step is mandatory
+    cfApiEndpoint: "https://api.cf.us10-001.hana.ondemand.com" # for example, "https://api.cf.eu10.hana.ondemand.com"
+    cfOrg: "e9a7ce0ctrial"
+    cfSpace: "dev" # the Cloud Foundry space, to which you want to deploy your application
+    cfAppName: "mta-ext-test"
+    deployType: "standard"
+    tmsUpload: false
+
+# Steps configuration
+steps:
+  # Release stage steps
+  cloudFoundryDeploy: # only relevant, if you set the cloudFoundryDeploy parameter in the Release stage to true
+    mtaExtensionDescriptor: "-e sandbox.mtaext"
+    mtaDeployParameters: "-f --version-rule ALL"
+    mtaExtensionCredentials:
+      S4_URL: 's4-url'
