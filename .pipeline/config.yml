@@ -9,7 +9,7 @@ service:
       cfCredentialsId: "cf-creds"
       credentialVariables:
         - name: "s4_odata_url"
-          credentialId: "S4ODATAURL"
+          credentialId: "s4odataurl"
 # Stages configuration
 stages:
   Build:
@@ -42,4 +42,4 @@ steps:
     mtaExtensionDescriptor: "-e sandbox.mtaext"
     mtaDeployParameters: "-f --version-rule ALL"
     mtaExtensionCredentials:
-      s4_odata_url: 'S4ODATAURL'
+      s4_odata_url: 's4odataurl'
