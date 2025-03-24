@@ -3,7 +3,7 @@ general:
   buildTool: "mta" # "mta", "npm", or "maven"
 
 service:
-  buildToolVersion: "MBTJ11N14" # depends on buildTool value
+  # buildToolVersion: "MBTJ11N14" # depends on buildTool value
   stages:
     Release: # optional, only relevant if you enable Release stage with Cloud Foundry deployment activated
       cfCredentialsId: "cf-creds"
