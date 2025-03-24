@@ -7,9 +7,9 @@ service:
   stages:
     Release: # optional, only relevant if you enable Release stage with Cloud Foundry deployment activated
       cfCredentialsId: "cf-creds"
-      stringVariables:
-        - name: "S4_URL"
-          value: "https://blogs.sap.com"
+      credentialVariables:
+        - name: "s4-url"
+          credentialId: "s4-odata-url"
 # Stages configuration
 stages:
   Build:
